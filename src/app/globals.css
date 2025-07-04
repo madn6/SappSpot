@@ -1,0 +1,27 @@
+@import url('https://fonts.cdnfonts.com/css/belanosima');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.cdnfonts.com/css/rangile');
+@import 'tailwindcss';
+
+@theme {
+	--color-sapp-background: #131416;
+	--color-sapp-surface: #191d20;
+	--color-sapp-surface-secondary: #1e2224;
+	--color-sapp-border: #2a2d30;
+	--color-sapp-text: #e6e7eb;
+	--color-sapp-muted-text: #9da3ab;
+	--color-sapp-primary: #f4bf3b;
+	--color-sapp-primary-hover: #e0aa2a;
+	--color-sapp-white: #f8f9fd;
+}
+
+body {
+	background-color: var(--color-sapp-background);
+	color: var(--color-sapp-text);
+	font-family: 'Inter';
+	font-weight: 400;
+}
+
+.font-rangile {
+	font-family: 'Rangile', sans-serif;
+}
