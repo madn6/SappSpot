@@ -9,7 +9,10 @@ import { useState } from 'react';
 import { Eye, EyeOff, LogIn } from 'lucide-react';
 import { FaGoogle } from 'react-icons/fa';
 import veg from '../../assests/images/dosa.jpg';
-import nonveg from '../../assests/images/naan.jpg';
+import api from '@/lib/axios';
+import { useRouter } from 'next/navigation';
+
+// import nonveg from '../../assests/images/naan.jpg';
 
 // Define the form data type
 type SignInFormData = {
@@ -24,6 +27,8 @@ const signInSchema = yup.object().shape({
 });
 
 export default function SignInPage() {
+	const router = useRouter();
+
 	const [showPassword, setShowPassword] = useState(false);
 
 	const togglePassword = () => setShowPassword((prev) => !prev);
@@ -40,8 +45,13 @@ export default function SignInPage() {
 	const watchPassword = watch('password');
 
 	const onSubmit = async (data: SignInFormData) => {
-		console.log('Sign In Submitted:', data);
-		// TODO: API integration here
+		try {
+			const response = await api.post('/auth/sign-in', data);
+			console.log('User signed in:', response.data.user);
+			router.push('/');
+		} catch (error) {
+			console.error('Signin error:', error);
+		}
 	};
 
 	return (

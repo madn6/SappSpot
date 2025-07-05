@@ -10,6 +10,8 @@ import { Eye, EyeOff, LogIn } from 'lucide-react';
 import { FaGoogle } from 'react-icons/fa';
 import veg from '../../assests/images/dosa.jpg';
 // import nonveg from '../../assests/images/naan.jpg';
+import api from '@/lib/axios';
+import { useRouter } from 'next/navigation';
 
 // Define the form data type
 type SignUpFormData = {
@@ -51,6 +53,8 @@ const signupSchema = yup.object().shape({
 });
 
 export default function SignUpPage() {
+	const router = useRouter();
+
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -73,8 +77,13 @@ export default function SignUpPage() {
 	const watchConfirmPassword = watch('confirmPassword');
 
 	const onSubmit = async (data: SignUpFormData) => {
-		console.log('Sign In Submitted:', data);
-		// TODO: API integration here
+		try {
+			const response = await api.post('/auth/sign-up', data);
+			console.log('User signed up:', response.data.user);
+			router.push('/');
+		} catch (error) {
+			console.error('Signup error:', error);
+		}
 	};
 
 	return (
