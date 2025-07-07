@@ -30,20 +30,21 @@ export async function POST() {
 			expiresIn: '7d'
 		});
 
-		cookieStore.set('accessToken', newAccessToken, {
+		const response = NextResponse.json({ message: 'Token refreshed' });
+
+		response.cookies.set('accessToken', newAccessToken, {
 			httpOnly: true,
 			sameSite: 'lax',
 			secure: process.env.NODE_ENV === 'production',
 			maxAge: 15 * 60
 		});
-		cookieStore.set('refreshToken', newRefreshToken, {
+		response.cookies.set('refreshToken', newRefreshToken, {
 			httpOnly: true,
 			sameSite: 'lax',
 			secure: process.env.NODE_ENV === 'production',
 			maxAge: 7 * 24 * 60 * 60
 		});
-
-		return NextResponse.json({ message: 'Token refreshed' });
+		return response;
 	} catch {
 		return NextResponse.json({ error: 'Invalid refresh token' }, { status: 403 });
 	}

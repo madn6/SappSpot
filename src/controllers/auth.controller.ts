@@ -1,7 +1,7 @@
-import User from "@/models/Auth.model";
-import bcrypt from "bcryptjs";
+import User from '@/models/Auth.model';
+import bcrypt from 'bcryptjs';
 import { generateTokens } from '@/lib/generateTokens';
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
 export const registerUser = async (body: {
 	displayName: string;
@@ -36,10 +36,10 @@ export const registerUser = async (body: {
 			displayName: newUser.displayName,
 			username: newUser.username,
 			email: newUser.email,
-			profileImage: newUser.profileImage,
+			profileImage: newUser.profileImage
 		},
 		accessToken,
-		refreshToken,
+		refreshToken
 	};
 };
 
@@ -58,11 +58,11 @@ export const loginUser = async (body: { email: string; password: string }) => {
 	}
 
 	const accessToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, {
-		expiresIn: '15m',
+		expiresIn: '15m'
 	});
 
 	const refreshToken = jwt.sign({ userId: user._id }, process.env.JWT_REFRESH_SECRET!, {
-		expiresIn: '7d',
+		expiresIn: '7d'
 	});
 
 	return {
@@ -71,10 +71,9 @@ export const loginUser = async (body: { email: string; password: string }) => {
 			username: user.username,
 			email: user.email,
 			displayName: user.displayName,
-			profileImage: user.profileImage,
+			profileImage: user.profileImage
 		},
 		accessToken,
-		refreshToken,
+		refreshToken
 	};
-}
-
+};

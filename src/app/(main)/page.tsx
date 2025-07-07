@@ -1,11 +1,13 @@
+'use client'
+
 export default function Home() {
 	return (
 		<div className="">
 			<main className="text-xl">
-				Tucked between two bustling city streets, The Olive Fork is a hidden gem that effortlessly
-				blends rustic charm with modern elegance. From the moment I stepped inside, the warm
-				lighting and subtle aroma of roasted garlic and herbs set the tone for what turned out to be
-				an exceptional dining experience.
+				Tucked between two bustling city
+				streets, The Olive Fork is a hidden gem that effortlessly blends rustic charm with modern
+				elegance. From the moment I stepped inside, the warm lighting and subtle aroma of roasted
+				garlic and herbs set the tone for what turned out to be an exceptional dining experience.
 				<br />
 				I started with the burrata salad, which was fresh, creamy, and perfectly balanced by the
 				acidity of heirloom tomatoes and a light balsamic glaze. For the main course, I chose the

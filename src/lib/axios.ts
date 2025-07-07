@@ -5,20 +5,22 @@ const api = axios.create({
 	withCredentials: true // ⚠️ Important to send/receive cookies (access & refresh tokens)
 });
 
-// Interceptor for 401 error
 api.interceptors.response.use(
 	(res) => res,
 	async (err) => {
 		const originalRequest = err.config;
 
 		if (err.response?.status === 401 && !originalRequest._retry) {
+			console.log('🔁 Interceptor: calling /api/auth/refresh...');
 			originalRequest._retry = true;
 
 			try {
 				await axios.post('/api/auth/refresh', {}, { withCredentials: true });
-				return api(originalRequest); // retry the original request
+
+				console.log('✅ Refresh successful. Retrying original request...');
+				return api(originalRequest);
 			} catch (refreshErr) {
-				console.error('Refresh token failed');
+				console.error('❌ Refresh failed', refreshErr);
 				return Promise.reject(refreshErr);
 			}
 		}
