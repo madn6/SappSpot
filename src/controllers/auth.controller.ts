@@ -12,6 +12,10 @@ export const registerUser = async (body: {
 }) => {
 	const { displayName, username, email, password, confirmPassword } = body;
 
+	if (!displayName || !username || !email || !password || !confirmPassword) {
+		return { error: 'Missing required fields', status: 400 };
+	}
+
 	// validate
 	if (password !== confirmPassword) {
 		return { error: 'Passwords do not match', status: 400 };

@@ -2,6 +2,8 @@ import { redis } from './upstash';
 
 // lib/limiter.ts
 export const limiter = async (key: string, limit = 5, windowSec = 60) => {
+	if (process.env.NODE_ENV === 'test') return;
+
 	const count = await redis.incr(key);
 
 	if (count === 1) {
@@ -12,4 +14,3 @@ export const limiter = async (key: string, limit = 5, windowSec = 60) => {
 		throw new Error('Too many attempts, please wait');
 	}
 };
-

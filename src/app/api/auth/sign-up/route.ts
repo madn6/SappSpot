@@ -29,7 +29,9 @@ export async function POST(req: Request) {
 	const result = await registerUser(body);
 
 	if ('error' in result) {
-		return NextResponse.json({ error: result.error }, { status: result.status });
+		return new Response(JSON.stringify({ error: result.error }), {
+			status: result.status || 400
+		});
 	}
 
 	const cookieStore = await cookies();
@@ -48,3 +50,5 @@ export async function POST(req: Request) {
 
 	return NextResponse.json({ user: result.user }, { status: 201 });
 }
+
+export default POST;

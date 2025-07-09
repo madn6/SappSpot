@@ -47,3 +47,5 @@ export async function POST(req: Request) {
 
 	return NextResponse.json({ user: result.user });
 }
+
+export default POST;
